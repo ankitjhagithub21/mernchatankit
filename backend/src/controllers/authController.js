@@ -23,14 +23,14 @@ const register = async (req, res) => {
     if (!fullname || !email || !password) {
       return res
         .status(400)
-        .json({ messsage: "All fields are required.", success: false });
+        .json({ message: "All fields are required.", success: false });
     }
 
     if (!validator.isEmail(email)) {
       return res
         .status(400)
         .json({
-          messsage: "Please enter valid email address.",
+          message: "Please enter valid email address.",
           success: false,
         });
     }
@@ -40,13 +40,13 @@ const register = async (req, res) => {
     if (existingUser) {
       return res
         .status(400)
-        .json({ messsage: "User already exist.", success: false });
+        .json({ message: "User already exist.", success: false });
     }
 
     if (!validator.isStrongPassword(password)) {
       return res
         .status(400)
-        .json({ messsage: "Please enter strong password.", success: false });
+        .json({ message: "Please enter strong password.", success: false });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -82,14 +82,14 @@ const login = async (req, res) => {
     if (!email || !password) {
       return res
         .status(400)
-        .json({ messsage: "All fields are required.", success: false });
+        .json({ message: "All fields are required.", success: false });
     }
 
     if (!validator.isEmail(email)) {
       return res
         .status(400)
         .json({
-          messsage: "Please enter valid email address.",
+          message: "Please enter valid email address.",
           success: false,
         });
     }
@@ -99,7 +99,7 @@ const login = async (req, res) => {
     if (!user) {
       return res
         .status(400)
-        .json({ messsage: "User not found.", success: false });
+        .json({ message: "User not found.", success: false });
         
     }
 
