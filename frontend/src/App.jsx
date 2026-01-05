@@ -1,27 +1,21 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-const App = () => {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <HomePage />,
-    },
-    {
-      path: "/login",
-      element: <LoginPage />,
-    },
+import { useAuth } from "./context/AuthContext";
 
-    {
-      path: "/register",
-      element: <RegisterPage />,
-    },
-  ]);
+const App = () => {
+
+  const {user} = useAuth()
+
   return (
-    <>
-      <RouterProvider router={router}/>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={ user ? <HomePage/> : <Navigate to={"/login"}/>}/>
+        <Route path="/login" element={user ? <Navigate to={"/"}/> : <LoginPage/>}/>
+        <Route path="/register" element={user ? <Navigate to={"/"}/> :  <RegisterPage/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 };
 
