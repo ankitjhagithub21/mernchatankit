@@ -17,7 +17,7 @@ const accessChat = async (req, res) => {
       isGroupChat: false,
       users: { $all: [loggedInUserId, userId] },
     })
-      .populate("users", "-password")
+      .populate("users", "fullname avatar")
       .populate("latestMessage");
 
     if (chat) {
@@ -57,7 +57,7 @@ const fetchChats = async (req, res) => {
     const chats = await Chat.find({
       users: { $elemMatch: { $eq: userId } },
     })
-      .populate("users", "-password")
+      .populate("users", "fullname avatar")
       .populate("latestMessage")
       .sort({ updatedAt: -1 });
 
