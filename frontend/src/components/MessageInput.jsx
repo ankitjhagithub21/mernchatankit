@@ -5,32 +5,39 @@ import { useChat } from "../context/ChatContext";
 const MessageInput = () => {
   const [text, setText] = useState("");
   const { selectedChat } = useChat();
+  const [loading, setLoading] = useState(false)
 
   const handleSend = async () => {
     if (!text.trim()) return;
     setText("");
 
+    setLoading(true)
     try {
       const res = await api.post(`/message`,{text,chatId:selectedChat._id})
       console.log(res.data)
     } catch (err) {
       console.error(err);
+    }finally{
+      setLoading(false)
     }
   };
 
   return (
-    <div className="p-3 border-t flex gap-2">
+    <div className="p-3 border-t border-gray-800 flex gap-2">
       <input
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Type a message..."
-        className="flex-1 border rounded-md px-3 py-2"
+        className="flex-1 input outline-none"
       />
       <button
         onClick={handleSend}
-        className="bg-primary text-primary-foreground px-4 rounded-md"
+        disable={loading}
+        className="btn btn-success"
       >
-        Send
+        {
+          loading ? 'Sending...' :'Send'
+        }
       </button>
     </div>
   );

@@ -17,7 +17,7 @@ const CurrentUser = () => {
   };
 
   return (
-    <div className="border-t p-3 flex items-center justify-between">
+    <div className="border-t border-gray-800  flex items-center justify-between h-14 w-full">
       {/* User Info */}
       <div className="flex items-center gap-3">
         <div className="bg-primary text-primary-foreground w-10 h-10 rounded-full flex items-center justify-center font-semibold">

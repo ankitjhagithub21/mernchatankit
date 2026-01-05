@@ -1,22 +1,20 @@
+import { useChat } from "../context/ChatContext";
+import { PanelRightOpen } from "lucide-react";
 const ChatHeader = () => {
+  const { selectedUser } = useChat();
   return (
-    <nav className="navbar w-full bg-base-300">
+    <nav className="navbar w-full bg-base-300 flex items-center justify-between">
+      {
+        selectedUser && <div className="px-4 flex items-center gap-2">
+        <div className="w-10 rounded-full">
+          <img src="https://img.daisyui.com/images/profile/demo/gordon@192.webp" className="rounded-full" alt="profile"/>
+        </div>
+        {selectedUser?.fullname}
+      </div>
+      }
       <label htmlFor="my-drawer-3" className="btn drawer-button lg:hidden">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          strokeLinejoin="round"
-          strokeLinecap="round"
-          strokeWidth="2"
-          fill="none"
-          stroke="currentColor"
-          className="my-1.5 inline-block size-4"
-        >
-          <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
-          <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-        </svg>
+        <PanelRightOpen />
       </label>
-      <div className="px-4">Navbar Title</div>
     </nav>
   );
 };

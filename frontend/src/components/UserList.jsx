@@ -5,24 +5,31 @@ import { useChat } from "../context/ChatContext";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
-  const {setSelectedChat} = useChat()
-  
+  const { setSelectedChat, setSelectedUser } = useChat();
+
   useEffect(() => {
     api.get("/users").then((res) => {
       setUsers(res.data.users);
     });
   }, []);
 
-  const handleUserClick = async (userId) => {
-    const res = await api.post("/chat", { userId });
+  const handleUserClick = async (user) => {
+    const res = await api.post("/chat", { userId: user._id });
     setSelectedChat(res.data.chat);
+    setSelectedUser(user);
   };
 
   return (
-    <div className="flex-1">
+    <div className="flex-1 overflow-y-scroll">
       {users.map((user) => (
-        <UserItem key={user._id} fullname={user.fullname} onClick={() => handleUserClick(user._id)}/>
+        <UserItem
+          key={user._id}
+          fullname={user.fullname}
+          onClick={() => handleUserClick(user)}
+          userId={user._id}
+        />
       ))}
+
     </div>
   );
 };

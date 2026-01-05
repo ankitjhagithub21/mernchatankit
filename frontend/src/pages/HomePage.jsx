@@ -10,7 +10,7 @@ const HomePage = () => {
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
 
       {/* MAIN CHAT AREA */}
-      <div className="drawer-content flex flex-col h-screen overflow-hidden">
+      <div className="drawer-content flex flex-col h-screen">
         <ChatHeader />
 
         {/* messages */}

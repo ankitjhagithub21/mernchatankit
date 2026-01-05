@@ -6,18 +6,20 @@ const Sidebar = () => {
     <div className="drawer-side">
       <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
 
-      <ul className="menu bg-base-200 min-h-full w-80 p-4 overflow-y-auto flex flex-col">
-        <div>
-          <h1 className="text-xl mb-3 font-semibold">Chats</h1>
+    
+       <div className="flex flex-col h-screen bg-base-200 w-80 p-2">
+        <div className="h-20">
+          <h1 className="text-xl mb-1 nfont-semibold">Chats</h1>
 
-          <label className="input input-bordered mb-3 flex items-center gap-2">
+          <label className="input input-bordered flex items-center gap-2">
             <input type="search" placeholder="Search" className="grow" />
           </label>
         </div>
         <UserList />
 
         <CurrentUser />
-      </ul>
+      </div>
+    
     </div>
   );
 };

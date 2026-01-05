@@ -1,6 +1,9 @@
-const UserItem = ({ fullname, onClick }) => {
+import { useChat } from "../context/ChatContext";
+
+const UserItem = ({ fullname, onClick , userId }) => {
+  const {selectedUser} = useChat()
   return (
-    <div className="flex items-center gap-3 p-2 rounded-lg cursor-pointer hover:bg-muted" onClick={onClick}>
+    <div className={`flex items-center gap-3 p-2 rounded-lg cursor-pointer hover:bg-muted ${selectedUser?._id === userId ? 'border border-gray-600':'border-none'}`} onClick={onClick}>
       <div className="avatar avatar-online avatar-placeholder">
         <div className="bg-neutral text-neutral-content w-10 rounded-full">
           <span className="text-xl">{fullname[0]}</span>
