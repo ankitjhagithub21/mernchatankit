@@ -4,6 +4,7 @@ import MessageList from "../components/MessageList";
 import UserList from "../components/UserList";
 
 const HomePage = () => {
+  
   return (
     <div className="drawer lg:drawer-open h-screen">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />

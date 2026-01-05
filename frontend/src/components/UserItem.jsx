@@ -1,6 +1,6 @@
-const UserItem = ({ fullname }) => {
+const UserItem = ({ fullname, onClick }) => {
   return (
-    <div className="flex items-center gap-3 p-2 rounded-lg cursor-pointer hover:bg-muted">
+    <div className="flex items-center gap-3 p-2 rounded-lg cursor-pointer hover:bg-muted" onClick={onClick}>
       <div className="avatar avatar-online avatar-placeholder">
         <div className="bg-neutral text-neutral-content w-10 rounded-full">
           <span className="text-xl">{fullname[0]}</span>
