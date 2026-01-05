@@ -6,4 +6,5 @@ const { accessChat, fetchChats } = require("../controllers/chatController");
 router.post("/", isAuth, accessChat);
 router.get("/", isAuth, fetchChats);
 
+
 module.exports = router;

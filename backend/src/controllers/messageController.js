@@ -42,4 +42,32 @@ const sendMessage = async (req, res) => {
   }
 };
 
-module.exports = { sendMessage };
+const getMessages = async (req, res) => {
+  try {
+    const { chatId } = req.params;
+
+    if (!chatId) {
+      return res.status(400).json({
+        success: false,
+        message: "ChatId is required",
+      });
+    }
+
+    const messages = await Message.find({ chat: chatId })
+      .populate("sender", "name avatar")
+      .sort({ createdAt: 1 });
+
+    res.status(200).json({
+      success: true,
+      messages,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch messages",
+    });
+  }
+};
+
+
+module.exports = { sendMessage, getMessages };
