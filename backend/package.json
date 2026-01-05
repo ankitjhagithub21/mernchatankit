@@ -4,15 +4,20 @@
   "description": "MERN Chat application developed by Ankit Jha.",
   "main": "server.js",
   "scripts": {
-    "start":"node src/server.js",
-    "dev":"node --watch src/server.js"
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
   },
   "keywords": [],
   "author": "Ankit Jha",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
-    "mongoose": "^9.1.1"
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.1.1",
+    "validator": "^13.15.26"
   }
 }
