@@ -2,7 +2,9 @@
 
 const MessageInput = () => {
   return (
-    <div>MessageInput</div>
+    <div className="p-2">
+      <input type="text" placeholder="Type here" className="input w-full outline-none" />
+    </div>
   )
 }
 
