@@ -4,11 +4,10 @@ import { useChat } from "../context/ChatContext";
 
 const MessageInput = () => {
   const [text, setText] = useState("");
-  const { selectedChat, messages, setMessages } = useChat();
+  const { selectedChat } = useChat();
 
   const handleSend = async () => {
     if (!text.trim()) return;
-    setMessages([...messages, tempMessage]);
     setText("");
 
     try {

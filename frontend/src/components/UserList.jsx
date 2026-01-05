@@ -19,7 +19,7 @@ const UserList = () => {
   };
 
   return (
-    <div className="space-y-2">
+    <div className="flex-1">
       {users.map((user) => (
         <UserItem key={user._id} fullname={user.fullname} onClick={() => handleUserClick(user._id)}/>
       ))}
