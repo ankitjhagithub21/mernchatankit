@@ -32,7 +32,7 @@ const CurrentUser = () => {
       {/* Logout */}
       <button
         onClick={handleLogout}
-        className="p-2 rounded-md hover:bg-muted text-muted-foreground hover:text-foreground"
+        className="btn "
         title="Logout"
       >
         <LogOut size={18} />
