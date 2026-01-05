@@ -3,13 +3,6 @@ const MessageItem = ({ message }) => {
 
   return (
     <div className={`chat ${isOwn ? "chat-end" : "chat-start"}`}>
-      {!isOwn && (
-        <div className="chat-image avatar">
-          <div className="w-10 rounded-full">
-            <img src={sender.avatar} alt={sender.name} />
-          </div>
-        </div>
-      )}
 
       <div className="chat-header">
         {!isOwn && sender.name}

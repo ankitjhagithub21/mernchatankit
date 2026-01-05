@@ -52,7 +52,7 @@ const MessageList = () => {
               hour: "2-digit",
               minute: "2-digit",
             }),
-            sender: msg.sender,
+            sender: msg.sender || "https://cdn-icons-png.flaticon.com/512/149/149071.png",
             isOwn: msg.sender._id === user._id, 
           }}
         />
