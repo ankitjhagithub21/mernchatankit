@@ -50,4 +50,28 @@ const accessChat = async (req, res) => {
   }
 };
 
-module.exports = { accessChat };
+const fetchChats = async (req, res) => {
+  try {
+    const userId = req.userId;
+
+    const chats = await Chat.find({
+      users: { $elemMatch: { $eq: userId } },
+    })
+      .populate("users", "-password")
+      .populate("latestMessage")
+      .sort({ updatedAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      chats,
+    });
+    
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch chats",
+    });
+  }
+};
+
+module.exports = { accessChat, fetchChats };
