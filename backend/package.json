@@ -1,0 +1,18 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "MERN Chat application developed by Ankit Jha.",
+  "main": "server.js",
+  "scripts": {
+    "start":"node src/server.js",
+    "dev":"node --watch src/server.js"
+  },
+  "keywords": [],
+  "author": "Ankit Jha",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "mongoose": "^9.1.1"
+  }
+}
