@@ -26,4 +26,26 @@ const getCurrentUser = async (req, res) => {
   }
 };
 
-module.exports = { getCurrentUser };
+const getAllUsers = async (req, res) => {
+  try {
+    const loggedInUserId = req.userId;
+
+    const users = await User.find(
+      { _id: { $ne: loggedInUserId } },
+      "-password"
+    ).sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      users,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch users",
+    });
+  }
+};
+
+
+module.exports = { getCurrentUser , getAllUsers};

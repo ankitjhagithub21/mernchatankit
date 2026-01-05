@@ -11,8 +11,8 @@ const UserSchema = new Schema(
     email: {
       type: String,
       required: true,
-      unique:true,
-      index:true
+      unique: true,
+      index: true,
     },
 
     password: {
@@ -23,6 +23,10 @@ const UserSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
+    },
+    avatar: {
+      type: String,
+      default: "",
     },
   },
   { timestamps: false, versionKey: false }
