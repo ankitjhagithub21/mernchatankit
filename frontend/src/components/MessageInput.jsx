@@ -1,30 +1,39 @@
 import { useState } from "react";
+import api from "../services/api";
+import { useChat } from "../context/ChatContext";
 
 const MessageInput = () => {
-  const [message, setMessage] = useState("");
+  const [text, setText] = useState("");
+  const { selectedChat, messages, setMessages } = useChat();
 
-  const sendMessage = (e) => {
-    e.preventDefault();
-    if (!message.trim()) return;
+  const handleSend = async () => {
+    if (!text.trim()) return;
+    setMessages([...messages, tempMessage]);
+    setText("");
 
-    console.log("Send:", message);
-    setMessage("");
+    try {
+      const res = await api.post(`/message`,{text,chatId:selectedChat._id})
+      console.log(res.data)
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
-    <form
-      onSubmit={sendMessage}
-      className="p-2  flex gap-2 bg-base-300"
-    >
+    <div className="p-3 border-t flex gap-2">
       <input
-        type="text"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
         placeholder="Type a message..."
-        className="input outline-none w-full"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
+        className="flex-1 border rounded-md px-3 py-2"
       />
-      <button className="btn btn-primary">Send</button>
-    </form>
+      <button
+        onClick={handleSend}
+        className="bg-primary text-primary-foreground px-4 rounded-md"
+      >
+        Send
+      </button>
+    </div>
   );
 };
 

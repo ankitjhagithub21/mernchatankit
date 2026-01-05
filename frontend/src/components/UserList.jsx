@@ -6,6 +6,7 @@ import { useChat } from "../context/ChatContext";
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const {setSelectedChat} = useChat()
+  
   useEffect(() => {
     api.get("/users").then((res) => {
       setUsers(res.data.users);

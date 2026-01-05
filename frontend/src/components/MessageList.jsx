@@ -6,8 +6,8 @@ import { useAuth } from "../context/AuthContext";
 
 const MessageList = () => {
 
-  const [messages, setMessages] = useState([])
-  const {selectedChat} = useChat()
+
+  const {selectedChat, messages, setMessages} = useChat()
   const {user} = useAuth()
   
   const bottomRef = useRef(null);
@@ -53,7 +53,7 @@ const MessageList = () => {
               minute: "2-digit",
             }),
             sender: msg.sender,
-            isOwn: msg.sender._id === user._id, // fixed below
+            isOwn: msg.sender._id === user._id, 
           }}
         />
       ))}
