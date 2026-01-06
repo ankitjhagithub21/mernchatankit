@@ -43,10 +43,10 @@ const register = async (req, res) => {
         .json({ message: "User already exist.", success: false });
     }
 
-    if (!validator.isStrongPassword(password)) {
+    if (password.trim().length<6) {
       return res
         .status(400)
-        .json({ message: "Please enter strong password.", success: false });
+        .json({ message: "Password must be atleast 6 characters long.", success: false });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
