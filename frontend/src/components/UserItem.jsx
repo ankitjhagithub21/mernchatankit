@@ -1,6 +1,6 @@
 import { useChat } from "../context/ChatContext";
 
-const UserItem = ({ fullname, onClick, userId }) => {
+const UserItem = ({ fullname, onClick, userId , avatar}) => {
   const { selectedUser, onlineUsers } = useChat();
 
   const isOnline = onlineUsers.includes(userId);
@@ -13,9 +13,11 @@ const UserItem = ({ fullname, onClick, userId }) => {
       `}
     >
       <div className="relative">
-        <div className="bg-neutral text-neutral-content w-10 h-10 rounded-full flex items-center justify-center">
+        {
+          avatar  ? <img src={avatar} alt={"U"} className="w-10 h-10 object-cover object-center" /> : <div className="bg-neutral text-neutral-content w-10 h-10 rounded-full flex items-center justify-center">
           <span className="text-xl">{fullname[0]}</span>
         </div>
+        }
 
         {/* Online indicator */}
         <span

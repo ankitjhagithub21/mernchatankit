@@ -32,7 +32,7 @@ const getAllUsers = async (req, res) => {
 
     const users = await User.find(
       { _id: { $ne: loggedInUserId } },
-      "fullname"
+      "fullname avatar"
     ).sort({ createdAt: -1 });
 
     res.status(200).json({

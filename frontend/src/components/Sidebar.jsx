@@ -8,12 +8,8 @@ const Sidebar = () => {
 
     
        <div className="flex flex-col h-screen bg-base-200 w-80 p-2">
-        <div className="h-20">
-          <h1 className="text-xl mb-1 nfont-semibold">Chats</h1>
-
-          <label className="input outline-none flex items-center gap-2">
-            <input type="search" placeholder="Search" className="grow" />
-          </label>
+        <div className="h-10 flex items-center px-2">
+          <h1 className="text-xl nfont-semibold">Chats</h1>  
         </div>
         <UserList />
 

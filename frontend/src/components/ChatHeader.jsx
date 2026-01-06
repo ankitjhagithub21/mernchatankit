@@ -7,7 +7,7 @@ const ChatHeader = () => {
       {
         selectedUser && <div className="px-4 flex items-center gap-2">
         <div className="w-10 rounded-full">
-          <img src="https://img.daisyui.com/images/profile/demo/gordon@192.webp" className="rounded-full" alt="profile"/>
+          <img src={selectedUser?.avatar || "https://cdn-icons-png.flaticon.com/512/149/149071.png"} className="rounded-full" alt="profile"/>
         </div>
         {selectedUser?.fullname}
       </div>

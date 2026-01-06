@@ -27,6 +27,7 @@ const UserList = () => {
           fullname={user.fullname}
           onClick={() => handleUserClick(user)}
           userId={user._id}
+          avatar={user.avatar}
         />
       ))}
 
