@@ -1,9 +1,10 @@
 const Message = require("../models/messageModel");
 const Chat = require("../models/chatModel");
+const { io } = require("../socket/socket");
 
 const sendMessage = async (req, res) => {
   try {
-    const { chatId, text} = req.body;
+    const { chatId, text } = req.body;
     const senderId = req.userId;
 
     if (!chatId || !text) {
@@ -29,6 +30,9 @@ const sendMessage = async (req, res) => {
     await Chat.findByIdAndUpdate(chatId, {
       latestMessage: message._id,
     });
+
+    // 🔥 Emit real-time message
+    io.to(chatId).emit("receive-message", message);
 
     res.status(201).json({
       success: true,
@@ -68,6 +72,5 @@ const getMessages = async (req, res) => {
     });
   }
 };
-
 
 module.exports = { sendMessage, getMessages };

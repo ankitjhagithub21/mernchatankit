@@ -3,6 +3,7 @@ import { useChat } from "../context/ChatContext";
 import MessageItem from "./MessageItem";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
+import socket from "../socket/socket";
 
 const MessageList = () => {
   const { selectedChat, messages, setMessages , selectedUser} = useChat();
@@ -24,6 +25,15 @@ const MessageList = () => {
 
     fetchMessages();
   }, [selectedChat]);
+
+   useEffect(() => {
+    socket.on("receive-message", (message) => {
+      setMessages((prev) => [...prev, message]);
+    });
+
+    return () => socket.off("receive-message");
+  }, []);
+
 
   // auto scroll to bottom
   useEffect(() => {
@@ -56,6 +66,8 @@ const MessageList = () => {
     );
   }
 
+
+  console.log(messages)
   return (
     <div className="p-5 space-y-4">
       {messages.map((msg) => (

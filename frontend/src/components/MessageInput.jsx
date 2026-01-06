@@ -32,7 +32,7 @@ const MessageInput = () => {
       />
       <button
         onClick={handleSend}
-        disable={loading}
+        disabled={loading}
         className="btn btn-success"
       >
         {
