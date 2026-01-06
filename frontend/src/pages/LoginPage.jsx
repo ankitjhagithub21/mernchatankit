@@ -97,7 +97,7 @@ const LoginPage = () => {
                 </label>
                 <input
                   type="email"
-                  className="input input-bordered w-full"
+                  className="input outline-none w-full"
                   placeholder="you@example.com"
                   id="email"
                   name="email"
@@ -112,7 +112,7 @@ const LoginPage = () => {
                 </label>
                 <input
                   type="password"
-                  className="input input-bordered w-full"
+                  className="input outline-none w-full"
                   placeholder="••••••••"
                   id="password"
                   name="password"

@@ -48,4 +48,6 @@ const getAllUsers = async (req, res) => {
 };
 
 
+
+
 module.exports = { getCurrentUser , getAllUsers};

@@ -13,8 +13,8 @@ const MessageInput = () => {
 
     setLoading(true)
     try {
-     await api.post(`/message`,{text,chatId:selectedChat._id})
-      
+      const res = await api.post(`/message`,{text,chatId:selectedChat._id})
+      console.log(res.data)
     } catch (err) {
       console.error(err);
     }finally{
