@@ -67,7 +67,7 @@ const MessageList = () => {
   }
 
 
-  console.log(messages)
+
   return (
     <div className="p-5 space-y-4">
       {messages.map((msg) => (
