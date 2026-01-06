@@ -20,8 +20,8 @@ const CurrentUser = () => {
     <div className="border-t border-gray-800  flex items-center justify-between h-14 w-full">
       {/* User Info */}
       <div className="flex items-center gap-3">
-        <div className="bg-primary text-primary-foreground w-10 h-10 rounded-full flex items-center justify-center font-semibold">
-          {user.fullname[0]}
+        <div className="w-10 rounded-full bg-primary text-center h-10 flex items-center justify-center cursor-pointer" onClick={()=>document.getElementById('my_modal_1').showModal()}>
+          {user.avatar ? <img src={user.avatar} alt={user.fullname} className="w-10 h-10 object-cover rounded-full" /> : user.fullname[0]}
         </div>
         <div className="leading-tight">
           <p className="font-medium text-sm">{user.fullname}</p>

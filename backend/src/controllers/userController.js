@@ -1,8 +1,8 @@
-const User = require("../models/userModel"); 
+const User = require("../models/userModel");
+const cloudinary = require("../config/cloudinary");
 
 const getCurrentUser = async (req, res) => {
   try {
-    
     const userId = req.userId;
 
     const user = await User.findById(userId).select("-password");
@@ -47,7 +47,46 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+const updateUserProfile = async (req, res) => {
+  try {
+    const { fullname } = req.body;
 
+    let result;
 
+    if (req.file) {
+     
+      const uploadFromBuffer = () => {
+        return new Promise((resolve, reject) => {
+          const stream = cloudinary.uploader.upload_stream(
+            { folder: "avatars" },
+            (error, result) => {
+              if (result) resolve(result);
+              else reject(error);
+            }
+          );
 
-module.exports = { getCurrentUser , getAllUsers};
+          stream.end(req.file.buffer);
+        });
+      };
+
+      result = await uploadFromBuffer();
+    }
+
+    const updateData = { fullname };
+    if (result?.secure_url) updateData.avatar = result.secure_url;
+
+    const user = await User.findByIdAndUpdate(req.userId, updateData, {
+      new: true,
+    }).select("-password");
+
+    res.json({ success: true, user });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      success: false,
+      message: "Profile update failed",
+    });
+  }
+};
+
+module.exports = { getCurrentUser, getAllUsers, updateUserProfile };

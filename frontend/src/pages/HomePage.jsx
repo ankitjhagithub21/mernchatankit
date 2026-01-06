@@ -6,6 +6,7 @@ import Sidebar from "../components/Sidebar";
 import { useChat } from "../context/ChatContext";
 import socket from "../socket/socket";
 import { useAuth } from "../context/AuthContext";
+import UpdateProfileDialog from "../components/UpdateProfileDialog";
 
 const HomePage = () => {
   const { selectedChat } = useChat();
@@ -45,6 +46,8 @@ const HomePage = () => {
 
       {/* SIDEBAR */}
       <Sidebar />
+
+      <UpdateProfileDialog/>
     </div>
   );
 };
