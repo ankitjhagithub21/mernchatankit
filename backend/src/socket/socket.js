@@ -22,9 +22,6 @@ io.on("connection", (socket) => {
     console.log("Joined chat:", chatId);
   });
 
-  socket.on("send-message", (message) => {
-    socket.to(message.chat).emit("receive-message", message);
-  });
 
   socket.on("disconnect", () => {
     console.log("User disconnected");

@@ -6,7 +6,7 @@ import { useAuth } from "../context/AuthContext";
 import socket from "../socket/socket";
 
 const MessageList = () => {
-  const { selectedChat, messages, setMessages , selectedUser} = useChat();
+  const { selectedChat, messages, setMessages, selectedUser } = useChat();
   const { user } = useAuth();
 
   const bottomRef = useRef(null);
@@ -26,7 +26,7 @@ const MessageList = () => {
     fetchMessages();
   }, [selectedChat]);
 
-   useEffect(() => {
+  useEffect(() => {
     socket.on("receive-message", (message) => {
       setMessages((prev) => [...prev, message]);
     });
@@ -34,6 +34,11 @@ const MessageList = () => {
     return () => socket.off("receive-message");
   }, []);
 
+  useEffect(() => {
+    if (!selectedChat?._id) return;
+
+    socket.emit("join-chat", selectedChat._id);
+  }, [selectedChat]);
 
   // auto scroll to bottom
   useEffect(() => {
@@ -65,8 +70,6 @@ const MessageList = () => {
       </div>
     );
   }
-
-
 
   return (
     <div className="p-5 space-y-4">

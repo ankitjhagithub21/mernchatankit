@@ -11,9 +11,7 @@ const HomePage = () => {
 
   useEffect(() => {
     if (!selectedChat) return;
-
     socket.emit("join-chat", selectedChat._id);
-
     return () => {
       socket.off("receive-message");
     };

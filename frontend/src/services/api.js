@@ -5,6 +5,7 @@ const baseUrl = `${import.meta.env.VITE_SERVER_URL}/api` || "http://localhost:80
 const api = axios.create({
   baseURL: baseUrl,
   withCredentials: true,
+   transports: ["websocket"]
 });
 
 export default api;
