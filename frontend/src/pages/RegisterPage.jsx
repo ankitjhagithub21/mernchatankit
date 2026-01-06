@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import api from "../services/api";
 import toast from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
+import { motion } from "framer-motion";
 
 const RegisterPage = () => {
   const { setUser } = useAuth();
@@ -11,11 +12,8 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const form = e.currentTarget;
-
     const formData = new FormData(form);
-
     const formObject = Object.fromEntries(formData.entries());
 
     setLoading(true);
@@ -25,84 +23,159 @@ const RegisterPage = () => {
       toast.success(res.data.message);
       navigate("/");
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast.error(error?.response?.data?.message || "Something went wrong.");
     } finally {
       setLoading(false);
     }
   };
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.4, ease: "easeOut" },
+    },
+  };
+
   return (
     <div className="hero bg-base-200 min-h-screen">
-      <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Create Your Account!</h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
-          </p>
-        </div>
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <div className="card-body">
+      <motion.div
+        className="hero-content flex-col lg:flex-row-reverse w-full max-w-4xl px-4"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
+        {/* Left Text Section */}
+        <motion.div
+          className="text-center lg:text-left mb-8 lg:mb-0 lg:mr-8"
+          variants={itemVariants}
+        >
+          <motion.h1
+            className="text-4xl md:text-5xl font-bold text-primary"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
+          >
+            Create Your Account!
+          </motion.h1>
+          <motion.p
+            className="py-4 text-base-content/80 max-w-md mx-auto lg:mx-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.35 }}
+          >
+            Join our community and start chatting instantly. Secure, fast, and
+            built for real conversations.
+          </motion.p>
+        </motion.div>
+
+        {/* Registration Form Card */}
+        <motion.div
+          className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl overflow-hidden"
+          variants={itemVariants}
+          whileHover={{ y: -5 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
+          <div className="card-body p-6">
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-              <div>
-                <label className="label" htmlFor="text">
-                  Full Name
+              {/* Full Name */}
+              <motion.div variants={itemVariants}>
+                <label className="label" htmlFor="fullname">
+                  <span className="label-text">Full Name</span>
                 </label>
                 <input
                   type="text"
-                  className="input"
-                  placeholder="Full Name"
+                  className="input outline-none w-full"
+                  placeholder="John Doe"
                   id="fullname"
                   name="fullname"
                   required
                 />
-              </div>
+              </motion.div>
 
-              <div>
+              {/* Email */}
+              <motion.div variants={itemVariants}>
                 <label className="label" htmlFor="email">
-                  Email
+                  <span className="label-text">Email</span>
                 </label>
                 <input
                   type="email"
-                  className="input"
-                  placeholder="Email"
+                  className="input outline-none w-full"
+                  placeholder="you@example.com"
                   id="email"
                   name="email"
                   required
                 />
-              </div>
-              <div>
+              </motion.div>
+
+              {/* Password */}
+              <motion.div variants={itemVariants}>
                 <label className="label" htmlFor="password">
-                  Password
+                  <span className="label-text">Password</span>
                 </label>
                 <input
                   type="password"
-                  className="input"
-                  placeholder="Password"
+                  className="input outline-none w-full"
+                  placeholder="••••••••"
                   id="password"
                   name="password"
                   required
                 />
-              </div>
-              <button
+              </motion.div>
+
+              {/* Submit Button */}
+              <motion.button
                 type="submit"
                 disabled={loading}
-                className="btn btn-neutral mt-4"
+                className="btn btn-primary mt-2"
+                whileTap={{ scale: 0.98 }}
+                variants={itemVariants}
               >
                 {loading ? (
                   <>
-                    <span className="loading loading-spinner"></span>
+                    <span className="loading loading-spinner loading-sm"></span>
                     Please wait...
                   </>
                 ) : (
-                  <>Register</>
+                  "Register"
                 )}
-              </button>
+              </motion.button>
+
+              {/* Login Link */}
+              <motion.div
+                className="text-center pt-2"
+                variants={itemVariants}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.7 }}
+              >
+                <p className="text-sm text-base-content/70">
+                  Already have an account?{" "}
+                  <Link
+                    to="/login"
+                    className="link link-primary font-medium hover:underline"
+                  >
+                    Log in
+                  </Link>
+                </p>
+              </motion.div>
             </form>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };

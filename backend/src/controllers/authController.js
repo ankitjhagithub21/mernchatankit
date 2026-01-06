@@ -12,7 +12,7 @@ const genToken = (payload) => {
 const options = {
   httpOnly: true,
   secure: true,
-  sameSite: "strict",
+  sameSite: "none",
   maxAge: 86400000, //1 day in miliseconds
 };
 
