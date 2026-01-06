@@ -5,7 +5,7 @@ import { useChat } from "../context/ChatContext";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
-  const { setSelectedChat, setSelectedUser } = useChat();
+  const { setSelectedChat, setSelectedUser, selectedUser } = useChat();
 
   useEffect(() => {
     api.get("/users").then((res) => {
@@ -13,7 +13,10 @@ const UserList = () => {
     });
   }, []);
 
-  const handleUserClick = async (user) => {
+   const handleUserClick = async (user) => {
+    // ⛔ Do nothing if same user is already selected
+    if (selectedUser?._id === user._id) return;
+
     const res = await api.post("/chat", { userId: user._id });
     setSelectedChat(res.data.chat);
     setSelectedUser(user);
