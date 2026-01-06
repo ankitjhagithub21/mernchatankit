@@ -5,9 +5,11 @@ import MessageList from "../components/MessageList";
 import Sidebar from "../components/Sidebar";
 import { useChat } from "../context/ChatContext";
 import socket from "../socket/socket";
+import { useAuth } from "../context/AuthContext";
 
 const HomePage = () => {
   const { selectedChat } = useChat();
+  const {user} = useAuth()
 
   useEffect(() => {
     if (!selectedChat) return;
@@ -16,6 +18,13 @@ const HomePage = () => {
       socket.off("receive-message");
     };
   }, [selectedChat]);
+
+  useEffect(() => {
+    if (!user?._id) return;
+
+    socket.emit("user-online", user._id);
+  }, [user]);
+
 
   return (
     <div className="drawer lg:drawer-open h-screen">

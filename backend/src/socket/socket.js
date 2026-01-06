@@ -13,18 +13,30 @@ const io = new Server(server, {
     credentials: true,
   },
 });
+const onlineUsers = new Map();
 
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
 
   socket.on("join-chat", (chatId) => {
     socket.join(chatId);
-    console.log("Joined chat:", chatId);
   });
 
+  socket.on("user-online", (userId) => {
+    onlineUsers.set(userId, socket.id);
+
+    io.emit("online-users", Array.from(onlineUsers.keys()));
+  });
 
   socket.on("disconnect", () => {
-    console.log("User disconnected");
+    for (let [userId, socketId] of onlineUsers.entries()) {
+      if (socketId === socket.id) {
+        onlineUsers.delete(userId);
+        break;
+      }
+    }
+
+    io.emit("online-users", Array.from(onlineUsers.keys()));
   });
 });
 
